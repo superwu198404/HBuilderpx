@@ -155,14 +155,14 @@
             "timeout" : 20000
         }
 		// "devServer" : {
-		// 	     "https": true,
-		//          "port" : 44321, //端口号
+		// 	     "https": false,
+		//          "port" : 8806, //端口号
 		//           "disableHostCheck" : true,
 		//           "proxy" : {
 		//               "/api" : {
-		//                   "target" : "https://localhost:44321/", //目标接口域名
+		//                   "target" : "http://192.168.0.132:8806/", //目标接口域名
 		//                    "changeOrigin" : true,  //是否跨域
-		//                    "secure" : true,// 设置支持https协议的代理
+		//                    "secure" : false,// 设置支持https协议的代理
 		// 				   "pathRewrite": {
 		// 				   	"^/api": ""
 		// 				   	}

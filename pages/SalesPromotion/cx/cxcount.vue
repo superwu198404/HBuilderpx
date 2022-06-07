@@ -9,7 +9,7 @@
 </template>
 
 <script>
-	const requestUrl = 'https://localhost:44321/CxService/CxCount'
+	const requestUrl = 'http://192.168.0.132:8806/CxService/CxCount'
 	let platform = uni.getSystemInfoSync().platform
 	export default {
 		data() {
