@@ -2,7 +2,7 @@
 	"pages": [
 		// pages数组中第一项表示应用启动页
 		{
-			"path": "pages/Electronic/bluetooth/bluescale",
+			"path": "pages/SalesPromotion/cx/cxcount",
 			"style": {
 				"navigationBarTitleText": "电子分货系统",
 				"app-plus": {
@@ -18,31 +18,31 @@
 			}
 		},
 		{
-			"path": "pages/Electronic/bluetooth/bluescale",
+			"path": "pages/SalesPromotion/cx/cxcount",
 			"style": {}
 		},
 		// #ifdef APP-PLUS || H5
 		{
-			"path": "pages/Electronic/bluetooth/bluescale",
+			"path": "pages/SalesPromotion/cx/cxcount",
 			"style": {}
 		}
 		// #endif
 	],
 	"subPackages": [{
-			"root": "pages/Electronic",
+			"root": "pages/SalesPromotion",
 			"pages": [
 				// #ifndef MP-ALIPAY
 				{
-					"path": "bluetooth/bluescale",
+					"path": "cx/cxcount",
 					"style": {
-						"navigationBarTitleText": "bluescale"
+						"navigationBarTitleText": "cxcount"
 					}
 				},
 				// #endif
 				{
-					"path": "bluetooth/bluescale",
+					"path": "cx/cxcount",
 					"style": {
-						"navigationBarTitleText": "bluescale"
+						"navigationBarTitleText": "cxcount"
 					}
 				}
 			]
