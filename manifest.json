@@ -2,8 +2,8 @@
     "name" : "Electronic",
     "appid" : "__UNI__7170D00",
     "description" : "应用描述",
-    "versionName" : "1.0.21",
-    "versionCode" : 121,
+    "versionName" : "1.0.22",
+    "versionCode" : 122,
     "transformPx" : false,
     "app-plus" : {
         "usingComponents" : false,
@@ -154,21 +154,26 @@
         "async" : {
             "timeout" : 20000
         }
-		// "devServer" : {
-		// 	     "https": false,
-		//          "port" : 8806, //端口号
-		//           "disableHostCheck" : true,
-		//           "proxy" : {
-		//               "/api" : {
-		//                   "target" : "http://192.168.0.132:8806/", //目标接口域名
-		//                    "changeOrigin" : true,  //是否跨域
-		//                    "secure" : false,// 设置支持https协议的代理
-		// 				   "pathRewrite": {
-		// 				   	"^/api": ""
-		// 				   	}
-		//              }
-		//         }
-		// }
     },
+    // "devServer" : {
+    // 	     "https": false,
+    //          "port" : 8806, //端口号
+    //           "disableHostCheck" : true,
+    //           "proxy" : {
+    //               "/api" : {
+    //                   "target" : "http://192.168.0.132:8806/", //目标接口域名
+    //                    "changeOrigin" : true,  //是否跨域
+    //                    "secure" : false,// 设置支持https协议的代理
+    // 				   "pathRewrite": {
+    // 				   	"^/api": ""
+    // 				   	}
+    //              }
+    //         }
+    // }
     "vueVersion" : "2"
 }
+//端口号
+//目标接口域名
+//是否跨域
+// 设置支持https协议的代理
+
