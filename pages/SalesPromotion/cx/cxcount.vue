@@ -38,9 +38,9 @@
 					dataType: 'json',
 					method: 'POST',
 					data: {
-						products: '[{\"ProCode\":\"11301001\",\"ProName\":\"水果沙拉\",\"ProNum\":\"1\",\"ProPrice\":\"1\",\"Disc\":\"0\",\"ProSalePrice\":\"1\",\"ProOPrice\":\"1\",\"ProImagePath\":\"\",\"SCID\":\"\",\"PLID\":null,\"SPJF\":\"0\",\"ProGGName\":\"\",\"isShowSpecs\":true,\"ProImagePathList\":null,\"SCID\":\"c8a26261-1b5d-44b6-9d73-b08e4f6b72fc\",\"CxBill\":\"\"},{\"ProCode\":\"11303001\",\"ProName\":\"礼盒2号\",\"ProNum\":\"1\",\"ProPrice\":\"2\",\"Disc\":\"0\",\"ProSalePrice\":\"2\",\"ProOPrice\":\"2\",\"ProImagePath\":\"\",\"SCID\":\"\",\"PLID\":null,\"SPJF\":\"0\",\"ProGGName\":\"\",\"isShowSpecs\":true,\"ProImagePathList\":null,\"SCID\":\"d92f195e-e424-4d37-9f95-b373bd0f3f8c\",\"CxBill\":\"\"}]',
-						khid: 'K0101QT6',
-					    hylevel: '0',
+						products: '[{\"ProCode\":\"10101016\",\"ProName\":\"水果沙拉\",\"ProNum\":\"1\",\"ProPrice\":\"100\",\"Disc\":\"0\",\"ProSalePrice\":\"100\",\"ProOPrice\":\"100\",\"ProImagePath\":\"\",\"SCID\":\"\",\"PLID\":null,\"SPJF\":\"0\",\"ProGGName\":\"\",\"isShowSpecs\":true,\"ProImagePathList\":null,\"SCID\":\"c8a26261-1b5d-44b6-9d73-b08e4f6b72fc\",\"CxBill\":\"\"},{\"ProCode\":\"10101020\",\"ProName\":\"礼盒2号\",\"ProNum\":\"1\",\"ProPrice\":\"200\",\"Disc\":\"0\",\"ProSalePrice\":\"200\",\"ProOPrice\":\"200\",\"ProImagePath\":\"\",\"SCID\":\"\",\"PLID\":null,\"SPJF\":\"0\",\"ProGGName\":\"\",\"isShowSpecs\":true,\"ProImagePathList\":null,\"SCID\":\"d92f195e-e424-4d37-9f95-b373bd0f3f8c\",\"CxBill\":\"\"}]',
+						khid: 'K0101QT11',
+					    hylevel: '',
 					},
 					header: {
 						'content-type': 'application/json' //自定义请求头信息
