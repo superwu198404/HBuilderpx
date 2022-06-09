@@ -2,7 +2,7 @@
 	"pages": [
 		// pages数组中第一项表示应用启动页
 		{
-			"path": "pages/SalesPromotion/cx/cxcount",
+			"path": "pages/Electronic/bluetooth/xprinter",
 			"style": {
 				"navigationBarTitleText": "电子分货系统",
 				"app-plus": {
@@ -18,31 +18,31 @@
 			}
 		},
 		{
-			"path": "pages/SalesPromotion/cx/cxcount",
+			"path": "pages/Electronic/bluetooth/xprinter",
 			"style": {}
 		},
 		// #ifdef APP-PLUS || H5
 		{
-			"path": "pages/SalesPromotion/cx/cxcount",
+			"path": "pages/Electronic/bluetooth/xprinter",
 			"style": {}
 		}
 		// #endif
 	],
 	"subPackages": [{
-			"root": "pages/SalesPromotion",
+			"root": "pages/Electronic",
 			"pages": [
 				// #ifndef MP-ALIPAY
 				{
-					"path": "cx/cxcount",
+					"path": "bluetooth/xprinter",
 					"style": {
-						"navigationBarTitleText": "cxcount"
+						"navigationBarTitleText": "xprinter"
 					}
 				},
 				// #endif
 				{
-					"path": "cx/cxcount",
+					"path": "bluetooth/xprinter",
 					"style": {
-						"navigationBarTitleText": "cxcount"
+						"navigationBarTitleText": "xprinter"
 					}
 				}
 			]
@@ -88,7 +88,7 @@
 		"list": [
 			{
 				"name": "", //模式名称
-				"path": "", //启动页面，必选
+				"path": "pages/Electronic/bluetooth/xprinter", //启动页面，必选
 				"query": "" //启动参数，在页面的onLoad函数里面得到
 			}
 		]

@@ -76,7 +76,7 @@
             "orientation" : [ "portrait-primary" ],
             "icons" : {
                 "android" : {
-                    "hdpi" : "D:/002_NewProject/vue电子屏展示/iOS_85x72.png"
+                    "hdpi" : "static/image/app_85x72.png"
                 }
             }
         },
