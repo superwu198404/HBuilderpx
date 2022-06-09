@@ -3,23 +3,23 @@
 	"name": "Electronic-app",
 	"displayName": "Electronic-app 电子分货显示屏",
 	"version": "3.3.8",
-	"description": "uni-app 框架示例，一套代码，同时发行到iOS、Android、H5、小程序等多个平台，请使用手机扫码快速体验 uni-app 的强大功能",
+	"description": "uni-app一套代码，同时发行到iOS、Android、H5、小程序等多个平台",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
-	"repository": "https://github.com/dcloudio/hello-uniapp.git",
+	"repository": "https://github.com/superwu198404/HBuilderpx.git",
 	"keywords": [
         "Electronic-app",
         "uni-app",
         "uni-ui",
-        "示例工程"
+        "vue项目"
     ],
 	"author": "",
 	"license": "MIT",
 	"bugs": {
-		"url": "https://github.com/dcloudio/hello-uniapp/issues"
+		"url": "https://github.com/superwu198404/HBuilderpx.git"
 	},
-	"homepage": "https://github.com/dcloudio/hello-uniapp#readme",
+	"homepage": "https://github.com/superwu198404/HBuilderpx.git",
 	"dependencies": {},
 	"dcloudext": {
 		"category": [
