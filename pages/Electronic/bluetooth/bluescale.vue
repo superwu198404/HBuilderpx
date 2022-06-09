@@ -1,6 +1,6 @@
 <template>
 	<view class="container">
-		<uni-nav-bar title="设备管理" left-icon="back" fixed backgroundColor='#fff' color='#000' :border='false'>
+		<uni-nav-bar title="电子秤设备管理" left-icon="back" fixed backgroundColor='#fff' color='#000' :border='false'>
 		</uni-nav-bar>
 		<view class="ul">
 			<view class="li" v-for="(item, index) in bluetooth" :key="index" :title="item.name"

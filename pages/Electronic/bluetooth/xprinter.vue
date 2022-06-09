@@ -1,6 +1,6 @@
 <template>
 	<view class="container">
-		<uni-nav-bar title="打印设备" left-icon="back" fixed backgroundColor='#fff' color='#000' :border='false'>
+		<uni-nav-bar title="打印设备管理" left-icon="back" fixed backgroundColor='#fff' color='#000' :border='false'>
 		</uni-nav-bar>
 		<view class="ul">
 			<view class="li" v-for="(item, index) in bluetooth" :key="index" :title="item.name"
@@ -50,7 +50,7 @@
 				value: '0102',
 				returnMessage: '',
 				macAddress: "",
-				macValue: '0', //获取的重量
+				macValue: '', //获取的值
 				macBlueName: 'Printer001', //对应的蓝牙名称
 				macBlueDeviceId: "",
 				macBlueIndex: 0,

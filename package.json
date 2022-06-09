@@ -23,8 +23,8 @@
 	"dependencies": {},
 	"dcloudext": {
 		"category": [
-			"前端页面模板",
-			"uni-app前端项目模板"
+			"前端页面",
+			"uni-app前端项目"
 		],
 		"sale": {
 			"regular": {
