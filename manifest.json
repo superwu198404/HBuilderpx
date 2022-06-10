@@ -76,7 +76,7 @@
             "orientation" : [ "portrait-primary" ],
             "icons" : {
                 "android" : {
-                    "hdpi" : "static/image/app_85x72.png"
+                    "hdpi" : "static/image/uniui-logo.png"
                 }
             }
         },

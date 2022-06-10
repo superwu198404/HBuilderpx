@@ -414,6 +414,21 @@ var render = function() {
         ],
         1
       ),
+      _c("v-uni-textarea", {
+        attrs: {
+          "auto-height": true,
+          "placeholder-style": "color:#F76260",
+          placeholder: "请输入票据信息",
+          _i: 16
+        },
+        model: {
+          value: _vm._$g(16, "v-model"),
+          callback: function($$v) {
+            _vm.$handleVModelEvent(16, $$v)
+          },
+          expression: "piaojuText"
+        }
+      }),
       _c(
         "v-uni-button",
         {
@@ -421,18 +436,19 @@ var render = function() {
             {
               name: "show",
               rawName: "v-show",
-              value: _vm._$g(16, "v-show"),
-              expression: "_$g(16,'v-show')"
+              value: _vm._$g(17, "v-show"),
+              expression: "_$g(17,'v-show')"
             }
           ],
-          attrs: { type: "default", _i: 16 },
+          staticStyle: { "margin-top": "100upx" },
+          attrs: { _i: 17 },
           on: {
             click: function($event) {
               return _vm.$handleViewEvent($event)
             }
           }
         },
-        [_vm._v("获取称重")]
+        [_vm._v("票据打印")]
       )
     ],
     1

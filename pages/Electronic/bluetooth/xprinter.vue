@@ -24,16 +24,20 @@
 		<view style="display: flex;">
 			<button @click="startBluetoothDevicesDiscovery" v-show="isSearchShow" class="foot-btn-g">搜索周围设备</button>
 		</view>
-		<button type="default" @click="readBLECharacteristicValue" v-show="isGetShow">获取称重</button>
+		<textarea auto-height placeholder-style="color:#F76260" placeholder="请输入票据信息" v-model="piaojuText" />
+		<button style="margin-top: 100upx;" @click="senBleLabel()" v-show="isGetShow">票据打印</button>
 	</view>
 </template>
 
 <script>
+	//蓝牙打印 指令和转码
+	var tsc = require('../../../components/gprint/tsc.js')
+	var esc = require('../../../components/gprint/esc.js')
 	import {
 	    mapState,
 	    mapGetters,
 	    mapMutations
-	} from 'vuex'
+	} from 'vuex'	
 	export default {
 		data() {
 			return {
@@ -43,31 +47,23 @@
 				// 调试数据
 				serverList: [],
 				characteristics: [],
-				readCode: '',
-				readCodeMsg: '',
 				serviceId: '',
 				characteristicId: '',
-				value: '0102',
-				returnMessage: '',
-				macAddress: "",
-				macValue: '', //获取的值
 				macBlueName: 'Printer001', //对应的蓝牙名称
 				macBlueDeviceId: "",
 				macBlueIndex: 0,
 				isSearchShow: false,
 				isGetShow: true,
 				connected: 0,
+				piaojuText:'',
 			}
 		},
 		computed: {
             ...mapState(['blueName']),
-			showskg() {
-				return this.macValue;
-			}
 		},onLoad(){
 			//蓝牙是否在扫描设备
 			uni.onBluetoothAdapterStateChange((res)=>{
-				 console.log("蓝牙"+(res.discovering ? "开启":"关闭")+"搜索")
+				 console.log("蓝牙" + (res.discovering ? "开启":"关闭") + "搜索")
 				 this.discovering = res.discovering;
 			})
 			//监听扫描到的蓝牙设备
@@ -131,7 +127,7 @@
 			// 搜索周围蓝牙设备
 			startBluetoothDevicesDiscovery() {
 				console.log('开始搜索蓝牙设备')
-				const _this = this		
+				const _this = this
 				console.log(_this.bluetooth)
 				this.isSearch = true
 				this.bluetooth = []
@@ -180,14 +176,12 @@
 						var _macBlueDeviceId = "";
 						var _macBlueIndex = 0;
 						console.log(' 已发现的蓝牙设备', res)
-						
 						// _this.stopBluetoothDevicesDiscovery()
 						if(this.macBlueName != null && this.macBlueName != '')
 						{
 						   console.log("蓝牙缓存",key)
 						   let key = uni.getStorageSync(this.macBlueName);
 						}
-						
 						_this.bluetooth = res.devices.filter(item => {
 							//console.log('获取已发现的蓝牙设备-名称', item.name)
 							if (item.name == _this.macBlueName) {
@@ -244,7 +238,6 @@
 							mask: true
 						});
 						//自动读取称重
-						_this.readBLECharacteristicValue();
 					},
 					fail: res => {
 						if (res.message == 'already connect') {
@@ -304,9 +297,10 @@
 
 							let findItem = res.characteristics.find(item => {
 								let uuid = item.uuid
-								console.log(uuid)
-								return item.properties.notify
+								console.log("配置信息",item)
+								return item.properties.write
 							})
+							console.log("characteristicId",findItem)
 							_this.characteristicId = findItem.uuid;
 							console.log('当前使用的特征characteristicId:', _this.characteristicId)
 							_this.notifyBLECharacteristicValueChange(_this.deviceId)
@@ -338,7 +332,7 @@
 					deviceId: deviceId,
 					// 这里的 serviceId 需要在 getBLEDeviceServices 接口中获取
 					serviceId: _this.serviceId,
-					// 这里的 characteristicId 需要在 getBLEDeviceCharacteristics 接口中获取
+					// 这里的 uuid 需要在 getBLEDeviceCharacteristics 接口中获取
 					characteristicId: _this.characteristicId,
 					success: (res) => {
 						console.log('notifyBLECharacteristicValueChange success', res)
@@ -351,108 +345,73 @@
 					}
 				})
 			},
-			ab2hex(buffer) {
-				const hexArr = Array.prototype.map.call(
-					new Uint8Array(buffer),
-					function(bit) {
-						return ('00' + bit.toString(16)).slice(-2)
+			senBlData(deviceId, serviceId, characteristicId,uint8Array) {
+				console.log('************deviceId = [' + deviceId + ']  serviceId = [' + serviceId + '] characteristics=[' +characteristicId+ "]")
+				var uint8Buf = Array.from(uint8Array);
+				function split_array(datas,size){
+					var result = {};
+					var j = 0
+					for (var i = 0; i < datas.length; i += size) {
+						result[j] = datas.slice(i, i + size)
+						j++
 					}
-				)
-				return hexArr.join('')
-			},
-			//十六进制转字符串,调整高低位
-			hexCharCodeToStr(hexCharCodeStr) {
-				let trimedStr = hexCharCodeStr.trim();
-				let rawStr =
-					trimedStr.substr(0, 2).toLowerCase() === "0x" ?
-					trimedStr.substr(2) :
-					trimedStr;
-				let len = rawStr.length;
-				if (len % 2 !== 0) {
-					alert("Illegal Format ASCII Code!");
-					return "";
+					console.log(result)
+					return result
 				}
-				let curCharCode;
-				let resultStr = [];
-				for (let i = 0; i < len; i = i + 2) {
-					curCharCode = parseInt(rawStr.substr(i, 2), 16); // ASCII Code Value
-					resultStr.unshift(String.fromCharCode(curCharCode));
-				}
-
-				return Math.round(parseFloat(resultStr.join("")) * 100) / 100;
-			},
-			// 监听低功耗蓝牙设备的特征值变化
-			onBLECharacteristicValueChange(deviceId) {
-				const _this = this;
-				plus.bluetooth.onBLECharacteristicValueChange((res) => {
-					// console.log(`characteristic ${res.characteristicId} has changed, now is`, res)
-					// console.log(this.ab2hex(res.value))
-					_this.macAddress = res.deviceId;
-					let val = _this.ab2hex(res.value);
-
-					let resValue = _this.hexCharCodeToStr(val)
-					_this.macValue = resValue
-				    //console.log('macName',res)
-					//console.log('千克',resValue)
-					//console.log("蓝牙电子秤",this.macBlueDeviceId)
-				})
-			},
-			// 读取设备二进制数据
-			readBLECharacteristicValue() {
-				let _this = this;
-				console.log('读取设备二进制数据');
-				plus.bluetooth.readBLECharacteristicValue({
-					// 这里的 deviceId 需要已经通过 createBLEConnection 与对应设备建立链接
-					deviceId: _this.deviceId,
-					// 这里的 serviceId 需要在 getBLEDeviceServices 接口中获取
-					serviceId: _this.serviceId,
-					// 这里的 characteristicId 需要在 getBLEDeviceCharacteristics 接口中获取
-					characteristicId: _this.characteristicId,
-					success: (res) => {
-						console.log('readBLECharacteristicValue:', res)
-						this.readCode = res.errCode;
-						this.readCodeMsg = res.errMsg;
-						this.onBLECharacteristicValueChange(this.deviceId);
-					},
-					fail: (res) => {
-						console.log('readBLECharacteristicValue:', res)
-						this.readCode = res.errCode;
-						this.readCodeMsg = res.errMsg;
-						this.onBLECharacteristicValueChange(this.deviceId);
+				var sendloop = split_array(uint8Buf, 20);
+				// console.log(sendloop.length)
+				function realWriteData(sendloop, i) {
+					var data = sendloop[i]
+					if(typeof(data) == "undefined"){
+						return
 					}
-				})
-
-			},
-			// 写入低功耗蓝牙设备的特征值
-			writeBLECharacteristicValue(value) {
-				const _this = this;
-				console.log('写入低功耗蓝牙设备的特征值')
-				// const data = new Uint8Array(_this.write.qp).buffer;
-				//2
-				let codeLength = value.length / 2;
-				let buffer = new ArrayBuffer(codeLength)
-				const dataView = new DataView(buffer)
-
-				let data = [];
-				//在这里解析将要写入的值  
-				for (let i = 0; i < codeLength; i++) {
-					dataView.setUint8(i, '0X' + value.substring(i * 2, i * 2 + 2));
-
-					data.push(value.substring(2 * i, 2 * i + 2))
-				}
-				plus.bluetooth.writeBLECharacteristicValue({
-					deviceId: _this.deviceId,
-					serviceId: _this.serviceId,
-					characteristicId: _this.characteristicId,
-					value: buffer,
-					success: function(e) {
-						console.log('发送成功', data.join(','))
-						console.log('write characteristics success: ' + JSON.stringify(e));
-					},
-					fail: function(e) {
-						console.log('write characteristics failed: ' + JSON.stringify(e));
+					console.log("第【" + i + "】次写数据"+data)
+					var buffer = new ArrayBuffer(data.length)
+					var dataView = new DataView(buffer)
+					for (var j = 0; j < data.length; j++) {
+						dataView.setUint8(j, data[j]);
 					}
-				});
+					uni.writeBLECharacteristicValue({
+						deviceId,
+						serviceId,
+						characteristicId,
+						value: buffer,
+						success(res) {
+							realWriteData(sendloop, i + 1);
+						}
+					})
+				}
+			   var i = 0;
+				realWriteData(sendloop, i);
+			},
+			senBleLabel() {
+				//标签模式
+				let deviceId = this.deviceId;
+				let serviceId = this.serviceId;
+				let characteristicId = this.characteristicId;
+				var command = tsc.jpPrinter.createNew()
+				// console.log(command)
+			    // command.setSize(40, 30)
+       //          command.setGap(2)
+       //          command.setCls()
+       //          command.setText(50, 10, "TSS24.BF2", 1, 1, "打印测试")
+				command.form('202206091001',`单  号:202206091001`,`商品名称:测试商品`,`商品编码:101010006`,`数量:2`)
+                command.setQR(50, 50, "L", 5, "A", "1234567899")
+				command.setPagePrint()
+				console.log('打印测试',deviceId + '||' + serviceId + '||' + characteristicId);
+				this.senBlData(deviceId, serviceId, characteristicId,command.getData())
+			},
+			senBleLabel2(){
+				//票据模式
+				let deviceId = this.deviceId;
+				let serviceId = this.serviceId;
+				let characteristicId = this.characteristicId;
+				var command = esc.jpPrinter.createNew()
+				command.init()
+                command.setText(this.piaojuText);
+                command.setPrintAndFeedRow(1)
+				console.log('打印测试',deviceId + '||' + serviceId + '||' + characteristicId);
+				this.senBlData(deviceId, serviceId, characteristicId,command.getData())
 			},
 			//断开蓝牙连接 
 			closeBLEConnection(deviceId, index) {
