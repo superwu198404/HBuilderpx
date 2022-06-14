@@ -158,8 +158,6 @@ if (uni.restoreGlobal) {
   uni.restoreGlobal(weex, plus, setTimeout, clearTimeout, setInterval, clearInterval);
 }
 __definePage('pages/Electronic/bluetooth/xprinter', function () {return Vue.extend(__webpack_require__(/*! pages/Electronic/bluetooth/xprinter.vue?mpType=page */ 2).default);});
-__definePage('pages/Electronic/bluetooth/xprinter', function () {return Vue.extend(__webpack_require__(/*! pages/Electronic/bluetooth/xprinter.vue?mpType=page */ 2).default);});
-__definePage('pages/Electronic/bluetooth/xprinter', function () {return Vue.extend(__webpack_require__(/*! pages/Electronic/bluetooth/xprinter.vue?mpType=page */ 2).default);});
 
 /***/ }),
 /* 2 */

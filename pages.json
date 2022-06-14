@@ -16,22 +16,6 @@
 					}
 				}
 			}
-		},
-		{
-			"path": "pages/Electronic/bluetooth/xprinter",
-			"style": {}
-		}
-	],
-	"subPackages": [{
-			"root": "pages/Electronic",
-			"pages": [
-				{
-					"path": "bluetooth/xprinter",
-					"style": {
-						"navigationBarTitleText": "xprinter"
-					}
-				}
-			]
 		}
 	],
 	"globalStyle": {
