@@ -55,24 +55,11 @@
 			"navigationBarBackgroundColor": "#F1F1F1"
 		}
 	},
-	"tabBar": {
-		"color": "#7A7E83",
-		"selectedColor": "#007AFF",
-		"borderStyle": "black",
-		"backgroundColor": "#F8F8F8",
-		"list": [{
-				"pagePath": "pages/tabBar/Electronic/Electronic",
-				//"iconPath": "static/api.png",
-				//"selectedIconPath": "static/apiHL.png",
-				"text": "电子分货系统"
-			}
-		]
-	},
 	"condition" : { //模式配置，仅开发期间生效
 		"current": 0, //当前激活的模式(list 的索引项)
 		"list": [
 			{
-				"name": "", //模式名称
+				"name": "debug", //模式名称
 				"path": "pages/Electronic/bluetooth/xprinter", //启动页面，必选
 				"query": "" //启动参数，在页面的onLoad函数里面得到
 			}
